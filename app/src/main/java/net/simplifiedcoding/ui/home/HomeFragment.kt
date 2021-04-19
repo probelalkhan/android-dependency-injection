@@ -37,7 +37,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         binding.progressbar.visible(false)
         viewModel.getUser()
-        viewModel.user.observe(viewLifecycleOwner, Observer {
+        viewModel.user.observe(viewLifecycleOwner){
             when (it) {
                 is Resource.Success -> {
                     binding.progressbar.visible(false)
@@ -50,7 +50,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     handleApiError(it)
                 }
             }
-        })
+        }
 
         binding.buttonLogout.setOnClickListener {
             logout()

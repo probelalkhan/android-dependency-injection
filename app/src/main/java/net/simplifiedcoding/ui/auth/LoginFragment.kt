@@ -27,7 +27,6 @@ import net.simplifiedcoding.ui.visible
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private lateinit var binding: FragmentLoginBinding
-
     private lateinit var viewModel: AuthViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,7 +42,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         binding.progressbar.visible(false)
         binding.buttonLogin.enable(false)
 
-        viewModel.loginResponse.observe(viewLifecycleOwner, Observer {
+        viewModel.loginResponse.observe(viewLifecycleOwner) {
             binding.progressbar.visible(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
@@ -57,7 +56,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 }
                 is Resource.Failure -> handleApiError(it) { login() }
             }
-        })
+        }
 
         binding.editTextTextPassword.addTextChangedListener {
             val email = binding.editTextTextEmailAddress.text.toString().trim()
