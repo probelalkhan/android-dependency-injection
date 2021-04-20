@@ -27,27 +27,23 @@ import net.simplifiedcoding.ui.visible
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private lateinit var binding: FragmentLoginBinding
-    private lateinit var viewModel: AuthViewModel
+    private var viewModel: AuthViewModel? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLoginBinding.bind(view)
 
-        val remoteDataSource = RemoteDataSource()
-        val api = remoteDataSource.buildApi(AuthApi::class.java, requireContext())
-        val preferences = UserPreferences(requireContext())
-        val authRepository = AuthRepository(api, preferences)
-        viewModel = AuthViewModel(authRepository)
+        viewModel = (requireActivity() as AuthActivity).appContainer.authContainer?.authViewModelFactory?.create()
 
         binding.progressbar.visible(false)
         binding.buttonLogin.enable(false)
 
-        viewModel.loginResponse.observe(viewLifecycleOwner) {
+        viewModel?.loginResponse?.observe(viewLifecycleOwner) {
             binding.progressbar.visible(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
                     lifecycleScope.launch {
-                        viewModel.saveAccessTokens(
+                        viewModel?.saveAccessTokens(
                             it.value.user.access_token!!,
                             it.value.user.refresh_token!!
                         )
@@ -71,6 +67,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private fun login() {
         val email = binding.editTextTextEmailAddress.text.toString().trim()
         val password = binding.editTextTextPassword.text.toString().trim()
-        viewModel.login(email, password)
+        viewModel?.login(email, password)
     }
 }
