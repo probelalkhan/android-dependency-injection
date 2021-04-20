@@ -10,7 +10,7 @@ import net.simplifiedcoding.ui.auth.AuthActivity
 import net.simplifiedcoding.ui.home.HomeActivity
 import net.simplifiedcoding.ui.startNewActivity
 
-@AndroidEntryPoint
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
