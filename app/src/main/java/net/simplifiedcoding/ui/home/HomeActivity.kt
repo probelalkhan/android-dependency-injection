@@ -11,23 +11,27 @@ import net.simplifiedcoding.data.UserPreferences
 import net.simplifiedcoding.data.network.AuthApi
 import net.simplifiedcoding.data.network.RemoteDataSource
 import net.simplifiedcoding.data.network.UserApi
+import net.simplifiedcoding.data.repository.AuthRepository
 import net.simplifiedcoding.data.repository.UserRepository
 import net.simplifiedcoding.ui.auth.AuthActivity
+import net.simplifiedcoding.ui.auth.AuthViewModel
 import net.simplifiedcoding.ui.startNewActivity
 import javax.inject.Inject
 
 class HomeActivity : AppCompatActivity() {
 
     lateinit var userPreferences: UserPreferences
-    private lateinit var viewModel: HomeViewModel
+    lateinit var viewModel: HomeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        val remoteDataSource = RemoteDataSource()
-        val api = remoteDataSource.buildApi(UserApi::class.java, this)
+
         userPreferences = UserPreferences(this)
-        viewModel = HomeViewModel(UserRepository(api))
+        val remoteDataSource = RemoteDataSource()
+        val api = remoteDataSource.buildApi(UserApi::class.java,this)
+        val authRepository = UserRepository(api)
+        viewModel = HomeViewModel(authRepository)
     }
 
     fun performLogout() = lifecycleScope.launch {

@@ -10,6 +10,7 @@ import net.simplifiedcoding.ui.auth.AuthActivity
 import net.simplifiedcoding.ui.home.HomeActivity
 import net.simplifiedcoding.ui.startNewActivity
 
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,4 +23,5 @@ class MainActivity : AppCompatActivity() {
             startNewActivity(activity)
         })
     }
+
 }
