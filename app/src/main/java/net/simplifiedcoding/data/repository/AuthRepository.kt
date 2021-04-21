@@ -2,9 +2,8 @@ package net.simplifiedcoding.data.repository
 
 import net.simplifiedcoding.data.UserPreferences
 import net.simplifiedcoding.data.network.AuthApi
-import javax.inject.Inject
 
-class AuthRepository @Inject constructor(
+class AuthRepository (
     private val api: AuthApi,
     private val preferences: UserPreferences
 ) : BaseRepository(api) {

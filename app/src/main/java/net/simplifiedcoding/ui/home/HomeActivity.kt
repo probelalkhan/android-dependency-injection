@@ -1,22 +1,16 @@
 package net.simplifiedcoding.ui.home
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import net.simplifiedcoding.R
 import net.simplifiedcoding.data.UserPreferences
-import net.simplifiedcoding.data.network.AuthApi
 import net.simplifiedcoding.data.network.RemoteDataSource
 import net.simplifiedcoding.data.network.UserApi
-import net.simplifiedcoding.data.repository.AuthRepository
 import net.simplifiedcoding.data.repository.UserRepository
 import net.simplifiedcoding.ui.auth.AuthActivity
-import net.simplifiedcoding.ui.auth.AuthViewModel
 import net.simplifiedcoding.ui.startNewActivity
-import javax.inject.Inject
 
 class HomeActivity : AppCompatActivity() {
 

@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
-import dagger.hilt.android.AndroidEntryPoint
 import net.simplifiedcoding.data.UserPreferences
 import net.simplifiedcoding.ui.auth.AuthActivity
 import net.simplifiedcoding.ui.home.HomeActivity

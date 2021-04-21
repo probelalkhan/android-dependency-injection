@@ -1,9 +1,8 @@
 package net.simplifiedcoding.data.repository
 
 import net.simplifiedcoding.data.network.UserApi
-import javax.inject.Inject
 
-class UserRepository @Inject constructor(
+class UserRepository(
     private val api: UserApi
 ) : BaseRepository(api) {
 
