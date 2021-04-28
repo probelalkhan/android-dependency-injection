@@ -8,8 +8,9 @@ import net.simplifiedcoding.data.network.Resource
 import net.simplifiedcoding.data.repository.AuthRepository
 import net.simplifiedcoding.data.responses.LoginResponse
 import net.simplifiedcoding.ui.base.BaseViewModel
+import javax.inject.Inject
 
-class AuthViewModel(
+class AuthViewModel @Inject constructor(
     private val repository: AuthRepository
 ) : BaseViewModel(repository) {
 

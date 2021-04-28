@@ -1,10 +1,12 @@
 package net.simplifiedcoding.ui.auth
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import dagger.android.support.AndroidSupportInjection
 import kotlinx.coroutines.launch
 import net.simplifiedcoding.R
 import net.simplifiedcoding.data.network.Resource
@@ -14,18 +16,22 @@ import net.simplifiedcoding.ui.handleApiError
 import net.simplifiedcoding.ui.home.HomeActivity
 import net.simplifiedcoding.ui.startNewActivity
 import net.simplifiedcoding.ui.visible
+import javax.inject.Inject
 
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private lateinit var binding: FragmentLoginBinding
-    private var viewModel: AuthViewModel? = null
+    @Inject lateinit var viewModel: AuthViewModel
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        AndroidSupportInjection.inject(this)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLoginBinding.bind(view)
-
-        viewModel = (requireActivity() as AuthActivity).appContainer.authContainer?.authViewModelFactory?.create()
 
         binding.progressbar.visible(false)
         binding.buttonLogin.enable(false)
