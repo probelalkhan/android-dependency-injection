@@ -3,25 +3,21 @@ package net.simplifiedcoding.di
 import android.content.Context
 import dagger.Module
 import dagger.Provides
-import net.simplifiedcoding.data.UserPreferences
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import net.simplifiedcoding.data.network.AuthApi
 import net.simplifiedcoding.data.network.RemoteDataSource
-import javax.inject.Singleton
 
 @Module
-class AppModule(
-   private val context: Context
-) {
+@InstallIn(SingletonComponent::class)
+object AppModule {
 
-    @Singleton
     @Provides
-    fun provideAuthApi(remoteDataSource: RemoteDataSource): AuthApi {
+    fun provideAuthApi(
+        @ApplicationContext context: Context,
+        remoteDataSource: RemoteDataSource
+    ): AuthApi {
         return remoteDataSource.buildApi(AuthApi::class.java, context)
-    }
-
-    @Singleton
-    @Provides
-    fun provideUserPreferences(): UserPreferences {
-        return UserPreferences(context)
     }
 }
